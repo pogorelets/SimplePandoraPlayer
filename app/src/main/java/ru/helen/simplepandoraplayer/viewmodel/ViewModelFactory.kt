@@ -10,6 +10,8 @@ class ViewModelFactory (val repository: NetworkRepositoryImpl): ViewModelProvide
             return LoginModel(repository) as T
         } else if (modelClass.isAssignableFrom(StationModel::class.java)){
             return StationModel(repository) as T
+        } else if (modelClass.isAssignableFrom(PlayerModel::class.java)){
+            return PlayerModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

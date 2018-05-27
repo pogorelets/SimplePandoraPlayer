@@ -2,6 +2,7 @@ package ru.helen.simplepandoraplayer.di
 
 import dagger.Component
 import ru.helen.simplepandoraplayer.ui.LoginActivity
+import ru.helen.simplepandoraplayer.ui.player.PlayerActivity
 import ru.helen.simplepandoraplayer.ui.station.StationActivity
 import javax.inject.Singleton
 
@@ -10,4 +11,5 @@ import javax.inject.Singleton
 interface AppComponent {
     fun inject(loginActivity: LoginActivity)
     fun inject(stationActivity: StationActivity)
+    fun inject(playerActivity: PlayerActivity)
 }

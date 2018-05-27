@@ -6,4 +6,72 @@
     android:layout_height="match_parent"
     tools:context=".ui.player.PlayerActivity">
 
+    <ImageView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/nameAlbum"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/cover"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/nameAlbum"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/songName"
+        android:paddingLeft="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        app:layout_constraintBottom_toTopOf="@id/container"
+        android:id="@+id/songName"
+        app:layout_constraintStart_toStartOf="parent"
+        android:paddingLeft="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary_material_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton android:id="@+id/exoPrev"
+            app:layout_constraintRight_toLeftOf="@id/play"
+            style="@style/ExoMediaButton.Previous"/>
+
+        <android.support.constraint.ConstraintLayout
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:id="@+id/play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:visibility="visible"
+                android:id="@+id/exoPlay"
+                style="@style/ExoMediaButton.Play" />
+
+            <ImageButton
+                android:visibility="gone"
+                app:layout_constraintLeft_toRightOf="@id/exoPlay"
+                android:id="@+id/exoPause"
+                style="@style/ExoMediaButton.Pause" />
+
+        </android.support.constraint.ConstraintLayout>
+
+
+        <ImageButton
+            app:layout_constraintLeft_toRightOf="@id/play"
+            android:id="@+id/exoNext"
+            style="@style/ExoMediaButton.Next" />
+
+    </android.support.constraint.ConstraintLayout>
+
 </android.support.constraint.ConstraintLayout>
+
+
+
+
+
