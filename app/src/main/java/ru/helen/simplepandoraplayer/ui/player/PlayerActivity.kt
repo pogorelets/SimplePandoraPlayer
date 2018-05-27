@@ -2,11 +2,13 @@ package ru.helen.simplepandoraplayer.ui.player
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import com.bumptech.glide.Glide
 import com.google.android.exoplayer2.*
@@ -27,6 +29,7 @@ import javax.inject.Inject
 import com.google.android.exoplayer2.ExoPlaybackException
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.source.TrackGroupArray
+import ru.helen.simplepandoraplayer.ui.station.StationActivity
 
 
 class PlayerActivity : AppCompatActivity() {
@@ -44,12 +47,15 @@ class PlayerActivity : AppCompatActivity() {
     lateinit var player: SimpleExoPlayer
 
     //TODO Аудиофокус когда звонят или выдёргивают наушники
-    //TODO Все это в foregroundservice
+    //TODO Все это в foreground service
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
 
         App.instance.appComponent.inject(this)
         viewModel = ViewModelProviders
@@ -91,6 +97,13 @@ class PlayerActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            android.R.id.home -> startActivity(Intent(this, StationActivity::class.java))
+        }
+        return true
     }
 
     fun makeTrackList(audioitems: List<AudioItem>){
