@@ -6,6 +6,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_login.*
 
 import ru.helen.simplepandoraplayer.App
@@ -33,7 +34,13 @@ class LoginActivity : AppCompatActivity() {
                 .of(this, viewModelFactory)
                 .get(LoginModel::class.java)
 
-        viewModel.partnerUser.observe(this, Observer { responce -> viewModel.login(responce!!, name.text.toString(), password.text.toString()) })
+        viewModel.error.observe(this, Observer { responce -> Toast.makeText(this,responce,Toast.LENGTH_SHORT) })
+        viewModel.partnerUser.observe(this, Observer { responce ->
+            //TODO нормальную валидацию
+            if (name.text.toString() !="" && password.text.toString() != ""){
+                viewModel.login(responce!!, name.text.toString(), password.text.toString())
+            }
+            })
         viewModel.user.observe(this, Observer { responce ->
             Storage.user = responce!!
             startActivity(Intent(this, StationActivity::class.java))

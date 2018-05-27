@@ -49,7 +49,7 @@ class AppModule(val context : Context) {
             .readTimeout(600, TimeUnit.SECONDS)
             .connectTimeout(600, TimeUnit.SECONDS)
             //прокси для пандоры
-            //.proxy(Proxy(Proxy.Type.HTTP, InetSocketAddress("174.32.124.50", 87)))
+            .proxy(Proxy(Proxy.Type.HTTP, InetSocketAddress("18.221.250.107", 8080)))
             .build()
 
 

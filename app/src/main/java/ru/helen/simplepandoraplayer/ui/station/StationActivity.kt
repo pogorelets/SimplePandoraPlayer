@@ -46,6 +46,8 @@ class StationActivity : AppCompatActivity(), StationListener {
                Storage.searchStations = stations.filter{ it.stationName!!.contains(search.text.toString(),true)}
                if (!Storage.searchStations.isEmpty()){
                     startActivity(Intent(this, ResultActivity::class.java))
+               } else {
+                   //TODO Сообщение, что ничего не найдено
                }
             }
         }

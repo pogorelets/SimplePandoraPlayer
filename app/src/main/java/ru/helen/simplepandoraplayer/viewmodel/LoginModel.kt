@@ -12,17 +12,17 @@ import ru.helen.simplepandoraplayer.utils.hexStringToByteArray;
 class LoginModel(val repository: NetworkRepositoryImpl): ViewModel() {
     var user : MutableLiveData<User> = MutableLiveData()
     var partnerUser : MutableLiveData<PartnerUser> = MutableLiveData()
-
+    var error: MutableLiveData<String> = MutableLiveData()
     fun login(partnerUser: PartnerUser, name: String, password: String) {
         Storage.partnerId = partnerUser.partnerId
         Storage.authToken = partnerUser.partnerAuthToken
         Storage.partnerAuthToken = partnerUser.partnerAuthToken
         Storage.syncTime = decryptSyncTime(partnerUser.syncTime).toLong() - (System.currentTimeMillis() / 1000L)
-        repository.login(Storage.partnerId, Storage.authToken,  name,password, Storage.partnerAuthToken, user)
+        repository.login(Storage.partnerId, Storage.authToken,  name,password, Storage.partnerAuthToken, user, error)
     }
 
     fun partnerLogin() {
-        repository.partnerLogin(partnerUser)
+        repository.partnerLogin(partnerUser, error)
     }
 
     private fun decryptSyncTime(raw: String): String {
