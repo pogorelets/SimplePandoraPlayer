@@ -177,13 +177,8 @@ class PlayerActivity : AppCompatActivity() {
                         playCurrentTrack()
                     }
                 }
-
-
             }
-
         })
-
-
     }
 
     fun playCurrentTrack(){
