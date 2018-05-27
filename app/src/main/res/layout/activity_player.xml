@@ -18,14 +18,14 @@
         android:id="@+id/nameAlbum"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/songName"
-        android:paddingLeft="15dp"
+        style="@style/PlayerTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <TextView
         app:layout_constraintBottom_toTopOf="@id/container"
         android:id="@+id/songName"
         app:layout_constraintStart_toStartOf="parent"
-        android:paddingLeft="15dp"
+        style="@style/PlayerTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

@@ -6,13 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_station.view.*
 import ru.helen.simplepandoraplayer.R
+import ru.helen.simplepandoraplayer.interfaces.StationListener
 import ru.helen.simplepandoraplayer.model.Station
 import java.util.*
 
 class StationAdapter(val listener: StationListener) : RecyclerView.Adapter<StationAdapter.StationHolder>() {
-    interface StationListener{
-        fun onStationClick(station: Station)
-    }
     private var data: List<Station> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StationHolder {

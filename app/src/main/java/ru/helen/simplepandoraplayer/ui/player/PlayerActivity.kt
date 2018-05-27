@@ -30,8 +30,6 @@ import com.google.android.exoplayer2.source.TrackGroupArray
 
 
 class PlayerActivity : AppCompatActivity() {
-
-
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     lateinit var viewModel: PlayerModel
@@ -44,6 +42,10 @@ class PlayerActivity : AppCompatActivity() {
 
 
     lateinit var player: SimpleExoPlayer
+
+    //TODO Аудиофокус когда звонят или выдёргивают наушники
+    //TODO Все это в foregroundservice
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

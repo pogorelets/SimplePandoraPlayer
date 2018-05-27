@@ -9,14 +9,16 @@ import android.support.v7.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_station.*
 import ru.helen.simplepandoraplayer.App
 import ru.helen.simplepandoraplayer.R
+import ru.helen.simplepandoraplayer.interfaces.StationListener
 import ru.helen.simplepandoraplayer.model.Station
 import ru.helen.simplepandoraplayer.repository.Storage
 import ru.helen.simplepandoraplayer.ui.player.PlayerActivity
+import ru.helen.simplepandoraplayer.ui.result.ResultActivity
 import ru.helen.simplepandoraplayer.viewmodel.StationModel
 import ru.helen.simplepandoraplayer.viewmodel.ViewModelFactory
 import javax.inject.Inject
 
-class StationActivity : AppCompatActivity(), StationAdapter.StationListener {
+class StationActivity : AppCompatActivity(), StationListener {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     lateinit var viewModel: StationModel
@@ -37,7 +39,19 @@ class StationActivity : AppCompatActivity(), StationAdapter.StationListener {
         })
         viewModel.getStationList()
 
+        clickSearch.setOnClickListener {
+
+           val stations: List<Station> = viewModel.stations.value?.stations!!
+            if (search.text.toString() != ""){
+               Storage.searchStations = stations.filter{ it.stationName!!.contains(search.text.toString(),true)}
+               if (!Storage.searchStations.isEmpty()){
+                    startActivity(Intent(this, ResultActivity::class.java))
+               }
+            }
+        }
+
     }
+
 
     fun updateListStations(stations: List<Station>){
         adapter.swapData(stations)

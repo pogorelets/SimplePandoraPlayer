@@ -9,6 +9,7 @@ object Storage {
     lateinit var partnerAuthToken: String
     lateinit var user: User
     lateinit var currentStation: Station
+    var searchStations: List<Station> = ArrayList()
     var syncTime: Long = 0
     val encryptKey: String = "6#26FRL\$ZWD"
     val decryptKey: String = "R=U!LH\$O2B#"
