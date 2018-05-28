@@ -7,7 +7,8 @@ import ru.helen.simplepandoraplayer.repository.NetworkRepositoryImpl
 
 class PlayerModel(val repository: NetworkRepositoryImpl): ViewModel() {
     var audioitems: MutableLiveData<List<AudioItem>> = MutableLiveData()
+    var error: MutableLiveData<String> = MutableLiveData()
     fun getAudio(){
-        repository.getAudioList(audioitems)
+        repository.getAudioList(audioitems,error)
     }
 }

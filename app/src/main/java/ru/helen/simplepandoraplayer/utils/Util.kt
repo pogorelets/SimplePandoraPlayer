@@ -1,5 +1,10 @@
 package ru.helen.simplepandoraplayer.utils
 
+import android.content.Context
+import android.graphics.Color
+import android.widget.TextView
+import android.widget.Toast
+
 fun String.hexStringToByteArray(): ByteArray {
     val len = length
     val data = ByteArray(len / 2)
@@ -20,4 +25,14 @@ fun ByteArray.bytesToHex(): String {
         hexChars[j * 2 + 1] = hexArray[v and 0x0F]
     }
     return String(hexChars)
+}
+
+fun showToastError(context: Context, error: String){
+    val toast = Toast.makeText(context,error, Toast.LENGTH_SHORT)
+    val view = toast.view
+    view.setBackgroundColor(Color.RED)
+    val text = view.findViewById(android.R.id.message) as TextView
+    text.setTextColor(Color.WHITE)
+    toast.show()
+
 }

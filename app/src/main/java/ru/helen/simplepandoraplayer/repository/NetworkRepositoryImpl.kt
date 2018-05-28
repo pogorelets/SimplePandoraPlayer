@@ -30,11 +30,8 @@ class NetworkRepositoryImpl(val api: PandoraAPI): NetworkRepository {
                 } else {
                     error.postValue(response?.body()?.message)
                 }
-
             }
-
         })
-
     }
 
     override fun partnerLogin(user: MutableLiveData<PartnerUser>, error: MutableLiveData<String>) {
@@ -46,8 +43,6 @@ class NetworkRepositoryImpl(val api: PandoraAPI): NetworkRepository {
                 } else{
                     error.postValue(response?.body()?.message)
                 }
-
-
             }
 
             override fun onFailure(call: Call<Responce<PartnerUser>>?, t: Throwable?) {
@@ -56,46 +51,37 @@ class NetworkRepositoryImpl(val api: PandoraAPI): NetworkRepository {
         })
     }
 
-    override fun getStationList(stations: MutableLiveData<ListStations>){
+    override fun getStationList(stations: MutableLiveData<ListStations>,error: MutableLiveData<String>){
         stationsCall = api.getStationList (encrypted =  true, request = RequestStation())
         stationsCall.enqueue(object : Callback<Responce<ListStations>>{
             override fun onFailure(call: Call<Responce<ListStations>>?, t: Throwable?) {
-                //TODO прокинуть ошибку в активити
-                Log.e("Error", t.toString())
+                error.postValue(t.toString())
             }
 
             override fun onResponse(call: Call<Responce<ListStations>>?, response: Response<Responce<ListStations>>?) {
                 if (response?.body()?.stat == "ok"){
                     stations.postValue(response?.body()?.result)
                 } else {
-                    //TODO прокинуть ошибку в активити
-                    Log.e("Error", response?.body()?.message)
+                    error.postValue(response?.body()?.message)
                 }
-
             }
-
         })
     }
 
-    override fun getAudioList(audioitems: MutableLiveData<List<AudioItem>>){
+    override fun getAudioList(audioitems: MutableLiveData<List<AudioItem>>,error: MutableLiveData<String>){
         audioCall = api.getAudioList(encrypted =  true, request = RequestAudio())
         audioCall.enqueue(object : Callback<Responce<ResponseAudio>>{
             override fun onFailure(call: Call<Responce<ResponseAudio>>?, t: Throwable?) {
-                //TODO Прокинуть ошибку в активити
-                Log.e("Error", t.toString())
+                error.postValue(t.toString())
             }
 
             override fun onResponse(call: Call<Responce<ResponseAudio>>?, response: Response<Responce<ResponseAudio>>?) {
                 if (response?.body()?.stat == "ok"){
                     audioitems.postValue(response?.body()?.result?.items)
                 } else {
-                    Log.e("Error",response?.body()?.message)
+                    error.postValue(response?.body()?.message)
                 }
-
             }
-
         })
-
-
     }
 }

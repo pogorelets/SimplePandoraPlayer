@@ -7,9 +7,9 @@ import ru.helen.simplepandoraplayer.repository.NetworkRepositoryImpl
 
 class StationModel(val repository: NetworkRepositoryImpl): ViewModel() {
     var stations: MutableLiveData<ListStations> = MutableLiveData()
-
+    var error: MutableLiveData<String> = MutableLiveData()
     fun getStationList(){
-        repository.getStationList(stations)
+        repository.getStationList(stations,error)
     }
 
 }

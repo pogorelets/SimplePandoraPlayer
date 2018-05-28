@@ -30,6 +30,7 @@ import com.google.android.exoplayer2.ExoPlaybackException
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.source.TrackGroupArray
 import ru.helen.simplepandoraplayer.ui.station.StationActivity
+import ru.helen.simplepandoraplayer.utils.showToastError
 
 
 class PlayerActivity : AppCompatActivity() {
@@ -65,6 +66,12 @@ class PlayerActivity : AppCompatActivity() {
         viewModel.getAudio()
         viewModel.audioitems.observe(this, Observer { responce ->
                makeTrackList(responce!!)
+        })
+
+        viewModel.error.observe(this,Observer {responce ->
+            if (responce != null) {
+                showToastError(this,responce)
+            }
         })
         initializePlayer()
         exoPlay.setOnClickListener {

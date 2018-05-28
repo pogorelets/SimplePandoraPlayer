@@ -17,6 +17,7 @@ import ru.helen.simplepandoraplayer.ui.result.ResultActivity
 import ru.helen.simplepandoraplayer.viewmodel.StationModel
 import ru.helen.simplepandoraplayer.viewmodel.ViewModelFactory
 import javax.inject.Inject
+import ru.helen.simplepandoraplayer.utils.showToastError
 
 class StationActivity : AppCompatActivity(), StationListener {
     @Inject
@@ -35,6 +36,11 @@ class StationActivity : AppCompatActivity(), StationListener {
 
         myStations.layoutManager = LinearLayoutManager(this)
         myStations.adapter = adapter
+        viewModel.error.observe(this,Observer {responce ->
+            if (responce != null) {
+                showToastError(this,responce)
+            }
+        })
         viewModel.stations.observe(this, Observer { responce -> updateListStations(responce?.stations!!)
         })
         viewModel.getStationList()

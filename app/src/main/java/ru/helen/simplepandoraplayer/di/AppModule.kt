@@ -47,8 +47,8 @@ class AppModule(val context : Context) {
             .addInterceptor(interceptor)
             .addInterceptor(EncryptionInterceptor())
             .readTimeout(600, TimeUnit.SECONDS)
-            .connectTimeout(600, TimeUnit.SECONDS)
-            //прокси для пандоры
+            .connectTimeout(10, TimeUnit.SECONDS)
+            //прокси для пандоры 18.221.250.107
             .proxy(Proxy(Proxy.Type.HTTP, InetSocketAddress("18.221.250.107", 8080)))
             .build()
 
